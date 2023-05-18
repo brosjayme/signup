@@ -33,6 +33,7 @@ if($result){
       if($result){
     // echo "Login Successfull";
     $success=1;
+    header('location:login.php');
    }else{
     die(mysqli_error($conn));
    }
