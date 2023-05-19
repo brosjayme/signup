@@ -25,7 +25,7 @@ if($result){
     if($num>0){
         // echo "user already exist";
         $user=1;
-    }else{
+    }else{  
 
    $sql= "insert into `registration`(username, password)
    values('$username', '$password')";
@@ -110,6 +110,12 @@ echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <input type="password" class="form-control"
      placeholder='Enter your password' name='password'>
   </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control"
+     placeholder='Enter your password' name='confirm_password'>
+  </div>
+
  
   <button type="submit" class="btn btn-primary w-100">Sign in</button>
 </form> 
