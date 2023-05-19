@@ -1,21 +1,12 @@
 <?php
-
+$invalid=0;
 $user=0;
 $success=0;
 if($_SERVER['REQUEST_METHOD']=='POST'){
 include 'config.php';
    $username=$_POST['username'];
    $password=$_POST['password'];
-
-//    $sql= "insert into `registration`(username, password)
-//    values('$username', '$password')";
-//    $result= mysqli_query($conn,$sql);
-//    if($result){
-//     echo "Data insertion successfull";
-//    }else{
-//     die(mysqli_error($conn));
-//    }
-
+   $confirm_password=$_POST['confirm_password'];
 
 
 $sql="select * from `registration` where username='$username'";
@@ -26,16 +17,18 @@ if($result){
         // echo "user already exist";
         $user=1;
     }else{  
-
+       if($password===$confirm_password){
    $sql= "insert into `registration`(username, password)
    values('$username', '$password')";
    $result= mysqli_query($conn,$sql);
       if($result){
     // echo "Login Successfull";
     $success=1;
-    header('location:login.php');
-   }else{
-    die(mysqli_error($conn));
+    // header('location:login.php');
+   }
+  }else{
+    $invalid=1;
+    // die(mysqli_error($conn));
    }
     }
 }
@@ -87,6 +80,15 @@ echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
 
 <?php
+if($invalid){
+echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>invalid</strong>User password does not match.
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+};
+?>
+
+<?php
 if($success){
 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 <strong>signup successfull!! </strong>welcome.
@@ -113,7 +115,7 @@ echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
     <input type="password" class="form-control"
-     placeholder='Enter your password' name='confirm_password'>
+     placeholder='confirm password' name='confirm_password'>
   </div>
 
  
